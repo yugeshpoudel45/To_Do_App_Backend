@@ -11,5 +11,3 @@ connectDB()
     console.error("Failed to connect to MongoDB", error);
     process.exit(1);
   });
-
-module.exports = app;
