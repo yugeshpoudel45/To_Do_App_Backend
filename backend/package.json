@@ -4,7 +4,7 @@
   "main": "index.js",
   "type": "module",
   "scripts": {
-    "start": "nodemon -r dotenv/config --experimental src/index.js"
+    "start": "nodemon -r dotenv/config --experimental index.js"
   },
   "keywords": [],
   "author": "",
