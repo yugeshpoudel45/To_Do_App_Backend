@@ -10,7 +10,7 @@ import {
 const todoRouter = Router();
 
 todoRouter.get("/", (req, res) => {
-  res.send("Hello World");
+  res.send("<h1>Welcome to the Todo API bruda</h1>");
 });
 
 todoRouter.post("/create", createTodo);

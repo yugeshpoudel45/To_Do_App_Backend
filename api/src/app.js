@@ -17,7 +17,7 @@ app.use(express.urlencoded({ extended: true }));
 import todoRouter from "./routes/todo.routes.js";
 
 app.get("/", (req, res) => {
-  res.send("Hello World");
+  res.send("<h2>Welcome to the Jungle</h2>");
 });
 
 app.use("/api/v1/users", todoRouter);
