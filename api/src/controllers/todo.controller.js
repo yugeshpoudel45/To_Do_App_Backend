@@ -14,11 +14,12 @@ export const createTodo = asyncHandler(async (req, res) => {
     if (!title || !description) {
       throw new ApiError(400, "Title and description are required");
     }
-    // Create a new Todo document using the model
+    // Create a new Todo document using the mongoose model created earlier in todo.models.js
     const todo = await Todo.create({
       title,
       description,
     });
+
     res
       .status(201)
       .json(new ApiResponse(201, todo, "Todo created successfully"));
@@ -54,7 +55,7 @@ export const updateTodo = asyncHandler(async (req, res) => {
   const todo = await Todo.findByIdAndUpdate(
     id,
     { title, description },
-    { new: true } // Return the updated document
+    { new: true } // Return the updated document rather than the original document by default
   );
 
   if (!todo) {
