@@ -19,9 +19,9 @@ userRouter.get("/", (req, res) => {
 userRouter.route("/register").post(registerUser);
 userRouter.route("/login").post(loginUser);
 userRouter.route("/logout").post(verifyJWT, logOutUser);
-userRouter.route("/refreshToken").post(refreshAccessToken);
+userRouter.route("/refreshAccessToken").post(refreshAccessToken);
 userRouter.route("/changePassword").post(verifyJWT, changeCurrentPassword);
-userRouter.route("/updateAccount").put(verifyJWT, updateAccountDetails);
+userRouter.route("/updateAccountDetails").put(verifyJWT, updateAccountDetails);
 userRouter.route("/currentUser").get(verifyJWT, getCurrentUser);
 
 export default userRouter;
