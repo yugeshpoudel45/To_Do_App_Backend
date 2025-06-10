@@ -5,7 +5,7 @@ import { Todo } from "../models/todo.models.js";
 
 export const createTodo = asyncHandler(async (req, res) => {
   try {
-    // console.dir(req.body, { depth: null });
+    //! console.dir(req.body, { depth: null });
 
     // Extract data from the request body
     const { title, description } = req.body;
