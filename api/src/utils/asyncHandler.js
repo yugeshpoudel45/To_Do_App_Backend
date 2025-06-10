@@ -7,6 +7,3 @@ const asyncHandler = (requestHandler) => {
 };
 
 export default asyncHandler;
-
-//AsyncHandler use garo vane try/catch use garna pardaina
-//Yesma error handle garna easy banauxa
