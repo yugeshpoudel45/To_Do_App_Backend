@@ -5,7 +5,7 @@ import { Todo } from "../models/todo.models.js";
 
 export const createTodo = asyncHandler(async (req, res) => {
   try {
-    //! console.dir(req.body, { depth: null });
+    // console.dir(req.body, { depth: null });
 
     // Extract data from the request body
     const { title, description } = req.body;
@@ -16,8 +16,9 @@ export const createTodo = asyncHandler(async (req, res) => {
     }
     // Create a new Todo document using the mongoose model created earlier in todo.models.js
     const todo = await Todo.create({
-      title,
-      description,
+      title: title,
+      description: description,
+      userId: req.user._id,
     });
 
     res
@@ -29,7 +30,9 @@ export const createTodo = asyncHandler(async (req, res) => {
 });
 
 export const getTodos = asyncHandler(async (req, res) => {
-  const todos = await Todo.find();
+  // console.dir(req.user._id.toString(), { depth: null });
+  const todos = await Todo.find({ userId: req.user._id });
+
   res
     .status(200)
     .json(new ApiResponse(200, todos, "Todos retrieved successfully"));
@@ -38,7 +41,7 @@ export const getTodos = asyncHandler(async (req, res) => {
 export const getTodosById = asyncHandler(async (req, res) => {
   const { id } = req.params;
 
-  const todo = await Todo.findById(id);
+  const todo = await Todo.findOne({ _id: id, userId: req.user._id });
 
   if (!todo) {
     throw new ApiError(404, "Todo not found");
@@ -53,7 +56,7 @@ export const updateTodo = asyncHandler(async (req, res) => {
   const { id } = req.params;
   const { title, description } = req.body;
   const todo = await Todo.findByIdAndUpdate(
-    id,
+    { _id: id, userId: req.user._id }, // Ensure the todo belongs to the user
     { title, description },
     { new: true } // Return the updated document rather than the original document by default
   );
