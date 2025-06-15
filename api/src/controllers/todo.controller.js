@@ -9,6 +9,7 @@ export const createTodo = asyncHandler(async (req, res) => {
 
     // Extract data from the request body
     const { title, description } = req.body;
+    const userId = req.user._id; // Assuming user ID is stored in req.user
 
     // Validate required fields
     if (!title || !description) {
@@ -18,7 +19,7 @@ export const createTodo = asyncHandler(async (req, res) => {
     const todo = await Todo.create({
       title: title,
       description: description,
-      userId: req.user._id,
+      userId: userId, // Associate the todo with the user
     });
 
     res

@@ -3,7 +3,7 @@ import { Counter } from "./counter.model.js";
 
 const todoSchema = new Schema(
   {
-    todoId: { type: Number, unique: true },
+    // todoId: { type: Number, unique: true },
     title: {
       type: String,
       required: [true, "Title is required"],
@@ -31,24 +31,24 @@ const todoSchema = new Schema(
         delete ret._id;
         delete ret.userId;
         delete ret.__v;
-        delete ret.id;
+        // delete ret.id;
       },
     },
   }
 );
 
-todoSchema.pre("save", async function (next) {
-  if (this.isNew) {
-    const counter = await mongoose
-      .model("Counter")
-      .findByIdAndUpdate(
-        { _id: "todoId" },
-        { $inc: { seq: 1 } },
-        { new: true, upsert: true }
-      );
-    this.todoId = counter.seq;
-  }
-  next();
-});
+// todoSchema.pre("save", async function (next) {
+//   if (this.isNew) {
+//     const counter = await mongoose
+//       .model("Counter")
+//       .findByIdAndUpdate(
+//         { _id: "todoId" },
+//         { $inc: { seq: 1 } },
+//         { new: true, upsert: true }
+//       );
+//     this.todoId = counter.seq;
+//   }
+//   next();
+// });
 
 export const Todo = mongoose.model("Todo", todoSchema);
